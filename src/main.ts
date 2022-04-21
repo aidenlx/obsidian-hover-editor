@@ -571,11 +571,11 @@ export default class HoverEditorPlugin extends Plugin {
     return oldLeaf;
   }
 
-  spawnPopover(initiatingEl?: HTMLElement, onShowCallback?: () => unknown): WorkspaceLeaf {
+  spawnPopover(initiatingEl?: HTMLElement, onShowCallback?: () => unknown, pinned = true): WorkspaceLeaf {
     const parent = this.app.workspace.activeLeaf as unknown as HoverEditorParent;
     if (!initiatingEl) initiatingEl = parent.containerEl;
     const hoverPopover = new HoverEditor(parent, initiatingEl!, this, undefined, onShowCallback);
-    hoverPopover.togglePin(true);
+    pinned && hoverPopover.togglePin(pinned);
     return hoverPopover.attachLeaf();
   }
 
